@@ -7,6 +7,10 @@ import os
 import random
 import sys
 
+# Check Python version
+if sys.version_info[0] < 3:
+    raise RuntimeError("Python 3 is required. Please run with 'python3' instead of 'python'.")
+
 import numpy as np
 from tqdm import trange
 
