@@ -91,9 +91,9 @@ Rules define how attributes change across the 3x3 matrix:
 
 ### Requirements
 
-- **Python 2.7** (legacy codebase)
+- **Python 3.7+** (dataset generation) / Python 2.7 (model training - legacy)
 - OpenCV (`opencv-contrib-python`)
-- PyTorch with CUDA support
+- PyTorch with CUDA support (for model training)
 - NumPy, SciPy, Matplotlib, Pillow, scikit-image, tqdm
 
 ### Installation
@@ -104,7 +104,8 @@ pip install -r requirements.txt
 
 ### Important Notes
 
-- The codebase uses Python 2 syntax (e.g., `print "..."`, `dict.keys()` returns list)
+- Dataset generation code (`src/dataset/`) is Python 3 compatible
+- Model training code (`src/model/`) uses Python 2 syntax and may require porting
 - CUDA is expected for model training
 - The `embedding.npy` file must be placed in the dataset directory for training
 
@@ -228,9 +229,9 @@ class CustomRule(Rule):
 
 ## Common Issues
 
-1. **Python version**: Code uses Python 2 syntax - may need `from __future__ import` for Python 3
-2. **scipy.misc.imresize**: Deprecated in newer SciPy - use `skimage.transform.resize`
-3. **scipy.misc.comb**: Moved to `scipy.special.comb` in newer versions
+1. **Dataset generation**: Fully compatible with Python 3.7+
+2. **Model training**: Uses Python 2 syntax - may need porting for Python 3
+3. **scipy.misc.imresize**: Deprecated in newer SciPy - use `skimage.transform.resize`
 4. **CUDA required**: Models expect GPU acceleration
 
 ## External Resources

@@ -173,7 +173,7 @@ class Arithmetic(Rule):
                     new_num_max_level = num_max_level_orig - old_value_level - 1
                     second_layout.layout_constraint["Number"][1] = new_num_max_level
                 else:
-                    num_min_level_orig = (second_layout.layout_constraint["Number"][0] - 1) / 2
+                    num_min_level_orig = (second_layout.layout_constraint["Number"][0] - 1) // 2
                     new_num_max_level = old_value_level - num_min_level_orig - 1
                     second_layout.layout_constraint["Number"][:] = [num_min_level_orig, new_num_max_level]
                 second_layout.reset_constraint("Number")
@@ -248,7 +248,7 @@ class Arithmetic(Rule):
                     # Need to reset each attribute
                     second_layout.entity_constraint["Size"][1] = new_size_max_level
                 else:
-                    size_min_level_orig = (current_layout.entity_constraint["Size"][0] - 1) / 2
+                    size_min_level_orig = (current_layout.entity_constraint["Size"][0] - 1) // 2
                     new_size_max_level = old_value_level - size_min_level_orig - 1
                     second_layout.entity_constraint["Size"] = [size_min_level_orig, new_size_max_level]
                 new_size_min_level, new_size_max_level = second_layout.entity_constraint["Size"]
@@ -299,7 +299,7 @@ class Arithmetic(Rule):
                     new_color_max_level = color_max_level_orig - old_value_level
                     second_layout.entity_constraint["Color"][1] = new_color_max_level
                 else:
-                    color_min_level_orig = second_layout.entity_constraint["Color"][0] / 2
+                    color_min_level_orig = second_layout.entity_constraint["Color"][0] // 2
                     new_color_max_level = old_value_level
                     second_layout.entity_constraint["Color"][:] = [color_min_level_orig, new_color_max_level]
                 new_color_min_level, new_color_max_level = second_layout.entity_constraint["Color"]
@@ -340,8 +340,8 @@ class Distribute_Three(Rule):
         second_layout = second_aot.children[0].children[self.component_idx].children[0]
         if self.attr == "Number":
             if self.count == 0:
-                all_value_levels = range(current_layout.layout_constraint["Number"][0], 
-                                         current_layout.layout_constraint["Number"][1] + 1)
+                all_value_levels = list(range(current_layout.layout_constraint["Number"][0],
+                                         current_layout.layout_constraint["Number"][1] + 1))
                 current_value_level = current_layout.number.get_value_level()
                 idx = all_value_levels.index(current_value_level)
                 all_value_levels.pop(idx)
